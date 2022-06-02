@@ -23,4 +23,26 @@ Console.ReadKey();
 
 student.GetStudentByNameUsingSqlQuery();
 
+Console.WriteLine("Press any key to update Student Name");
+
 Console.ReadKey();
+
+student.UpdateStudentData();
+
+Console.WriteLine("Display updated student data.");
+
+student.DisplayStudentData();
+
+Console.ReadKey();
+
+Console.WriteLine("Delete student data.");
+
+student.DeleteStudentData();
+
+Console.ReadKey();
+
+Console.WriteLine("Display student data after delete.");
+
+Console.ReadKey();
+
+student.DisplayStudentData();

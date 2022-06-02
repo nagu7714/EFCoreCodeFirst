@@ -22,7 +22,7 @@ namespace EFCoreCodeFirstSample
                 new Student(){  StudentName="Steve"},
                 new Student(){  StudentName="Ram"},
                 new Student(){  StudentName="Abdul"},
-                 new Student(){  StudentName="Bill Turner"},
+                new Student(){  StudentName="Bill Turner"},
             };
 
                 Console.WriteLine("Saving Student Data");
@@ -80,6 +80,35 @@ namespace EFCoreCodeFirstSample
             }
 
 
+        }
+
+        public void UpdateStudentData()
+        {
+            using (var context = new StudentContext())
+            {
+                var students = context.Students?.First<Student>();
+                if (students != null)
+                {
+                    students.StudentName = "Steve";
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public void DeleteStudentData()
+        {
+            using (var context = new StudentContext())
+            {
+                var students = context.Students?.First<Student>();
+                {
+                    if (students != null)
+                    {
+                        context.Students?.Remove(students);
+                        context.SaveChanges();
+
+                    }
+                }
+            }
         }
     }
 }

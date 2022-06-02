@@ -4,6 +4,7 @@ using EFCoreCodeFirstSample.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCoreCodeFirstSample.Migrations
 {
     [DbContext(typeof(StudentContext))]
-    partial class StudentContextModelSnapshot : ModelSnapshot
+    [Migration("20220602165531_SchoolDB-V3")]
+    partial class SchoolDBV3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,35 +76,6 @@ namespace EFCoreCodeFirstSample.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("EFCoreCodeFirstSample.Entity.StudentAddress", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int?>("AddressOfStudentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("State")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressOfStudentId")
-                        .IsUnique()
-                        .HasFilter("[AddressOfStudentId] IS NOT NULL");
-
-                    b.ToTable("StudentAddresses");
-                });
-
             modelBuilder.Entity("EFCoreCodeFirstSample.Entity.Student", b =>
                 {
                     b.HasOne("EFCoreCodeFirstSample.Entity.Grade", "Grade")
@@ -114,24 +87,9 @@ namespace EFCoreCodeFirstSample.Migrations
                     b.Navigation("Grade");
                 });
 
-            modelBuilder.Entity("EFCoreCodeFirstSample.Entity.StudentAddress", b =>
-                {
-                    b.HasOne("EFCoreCodeFirstSample.Entity.Student", "Student")
-                        .WithOne("Address")
-                        .HasForeignKey("EFCoreCodeFirstSample.Entity.StudentAddress", "AddressOfStudentId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Student");
-                });
-
             modelBuilder.Entity("EFCoreCodeFirstSample.Entity.Grade", b =>
                 {
                     b.Navigation("Students");
-                });
-
-            modelBuilder.Entity("EFCoreCodeFirstSample.Entity.Student", b =>
-                {
-                    b.Navigation("Address");
                 });
 #pragma warning restore 612, 618
         }
